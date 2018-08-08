@@ -1,5 +1,6 @@
 import React from 'react'
-
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import {
     Text,
     View,
@@ -8,7 +9,11 @@ import {
 
 // a vantagem de se usar uma constante ao invés da function keyword
 // é que com a constante garantimos que essa entidade não sofrerá alterações
-export const HomeScreen = () => (
+// Costumamos deixar esse export para ser mais fácil testar unitariamente esse component
+export const HomeScreenRaw = ({
+    dispatch,
+    example
+}) => (
     <View>
         <Text>Essa é a nossa home.</Text>
         <Text>
@@ -21,6 +26,23 @@ export const HomeScreen = () => (
             comecamos com o padrao, const, se precisarmos vamos lá
             e usamos o let quando a variavel precisa mudar durante a aplicação
         </Text>
+        <Text> O texto abaixo vem do redux \n {example.text}</Text>
     </View>
 )
 
+
+/*
+* IMPORTANTE | MUITO IMPORTANTE!!!
+* todos os componentes que recebem props,
+* como o caso desse em que o redux está injetando 2 props,
+* é de suma importancia add esse prop type
+*/
+HomeScreenRaw.propTypes = {
+    dispatch: PropTypes.func,
+    example: PropTypes.object,
+  }
+  
+export const HomeScreen = connect(
+    ({ example }) => ({ example }),
+    (dispatch) => ({ dispatch })
+)(HomeScreenRaw);
