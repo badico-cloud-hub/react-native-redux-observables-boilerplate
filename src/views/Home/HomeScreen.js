@@ -4,12 +4,15 @@ import { connect } from 'react-redux'
 import {
     Text,
     View,
-    TextInput,
 } from 'react-native'
 
+import {
+    Input
+} from '../../components'
 // a vantagem de se usar uma constante ao invés da function keyword
 // é que com a constante garantimos que essa entidade não sofrerá alterações
 // Costumamos deixar esse export para ser mais fácil testar unitariamente esse component
+
 export const HomeScreenRaw = ({
     dispatch,
     example
@@ -26,7 +29,14 @@ export const HomeScreenRaw = ({
             comecamos com o padrao, const, se precisarmos vamos lá
             e usamos o let quando a variavel precisa mudar durante a aplicação
         </Text>
-        <Text> O texto abaixo vem do redux \n {example.text}</Text>
+        <Text> Mude o texto abaixo que mudará esse aqui em frente: {example.text}</Text>
+        <Input
+            value={example.text}
+            placeholder='this will be updated'
+            onChangeText={
+                text => dispatch({ type: 'CHANGE_TEXT', text })
+            }
+        />
     </View>
 )
 
@@ -40,9 +50,9 @@ export const HomeScreenRaw = ({
 HomeScreenRaw.propTypes = {
     dispatch: PropTypes.func,
     example: PropTypes.object,
-  }
+}
   
 export const HomeScreen = connect(
     ({ example }) => ({ example }),
     (dispatch) => ({ dispatch })
-)(HomeScreenRaw);
+)(HomeScreenRaw)

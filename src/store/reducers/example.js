@@ -3,7 +3,7 @@ import { createReducer } from '../'
 const initialState = { text: 'initial text from Redux' };
 
 export default createReducer(initialState, {
-  'CHANGE_TEXT': () => ({
+  'CHANGE_TEXT': (state, action) => ({
     ...state,
     text: action.text
   }),
