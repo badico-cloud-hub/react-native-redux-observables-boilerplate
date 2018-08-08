@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { styles } from './App.styles'
-import { Routes } from './src/Navigation'
+import { Routes } from './src/Routes'
 
 export default class App extends React.Component {
     render() {
