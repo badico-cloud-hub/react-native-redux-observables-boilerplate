@@ -5,4 +5,6 @@ import {
     TextInput
 } from 'react-native'
 
-export const Input = ({ ...props }) => (<TextInput {...props} />)
+import { styles } from './styles'
+
+export const Input = ({ ...props }) => (<TextInput style={styles.input} {...props} />)

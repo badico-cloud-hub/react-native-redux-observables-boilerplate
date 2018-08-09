@@ -1,11 +1,13 @@
 import { createReducer } from '../'
 
-const initialState = { text: null };
+const initialState = {
+    location: 'Home'
+};
 
 export default createReducer(initialState, {
-  'CHANGE_TEXT': (state, action) => ({
+  'GO_TO': (state, action) => ({
     ...state,
-    text: action.text
+    location: action.location
   }),
   'GET_GOOGLE_SUCCESS': (state, action) => ({
     ...state,

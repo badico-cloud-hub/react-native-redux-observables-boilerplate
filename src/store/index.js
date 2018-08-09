@@ -13,7 +13,8 @@ import {
 
 import logger from 'redux-logger' //eslint-disable-line
 import * as reducers from './reducers'
-
+import * as epics from './epics'
+import { createEpicMiddleware, combineEpics } from 'redux-observable';
 export function createReducer(initialState, actionHandlers) {
     return function reducer(state = initialState, action) {
       if (actionHandlers.hasOwnProperty(action.type)) {
@@ -22,11 +23,12 @@ export function createReducer(initialState, actionHandlers) {
       return state
     }
 }
-
+const epicMiddleware = createEpicMiddleware();
 const rootReducer = combineReducers(reducers)
-const bucketMiddleware = []
+const bucketMiddleware = [epicMiddleware]
 const middleware = __DEV__ ? bucketMiddleware :  [...bucketMiddleware, logger]
-
+const rootEpic = combineEpics(...Object.values(epics))
+console.log(rootEpic)
 export function configureStore(initialState) {
   const store = createStore(
     rootReducer,
@@ -36,5 +38,6 @@ export function configureStore(initialState) {
     //   offline(offlineConfig)
     )
   )
+  epicMiddleware.run(rootEpic)
   return store
 }

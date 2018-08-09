@@ -1,0 +1,6 @@
+export const WILL_SAVE_FORM_FIELD = 'WILL_SAVE_FORM_FIELD'
+export const WILL_SEND_FORM = 'WILL_SEND_FORM'
+export const OPEN_FORM = 'OPEN_FORM'
+export const CLOSE_FORM = 'CLOSE_FORM'
+export const SAVE_FORM_FIELD = 'SAVE_FORM_FIELD'
+
